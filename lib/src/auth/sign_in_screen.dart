@@ -49,6 +49,7 @@ class SignInScreen extends StatelessWidget {
                         FadeAnimatedText("Verduras"),
                         FadeAnimatedText("Legumes"),
                         FadeAnimatedText("Carnes"),
+                        FadeAnimatedText("Vegetais"),
                         FadeAnimatedText("Cerais"),
                         FadeAnimatedText("Laticíneos"),
                       ],
