@@ -15,28 +15,90 @@ class SignInScreen extends StatelessWidget {
               color: Colors.lightGreen,
             ),
           ),
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(45),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(45),
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const CustomTextField(
+                  icon: Icons.email,
+                  label: "Email",
                 ),
-              ),
-              child: Column(
-                children: const [
-                  CustomTextField(
-                    icon: Icons.email,
-                    label: "Email",
+                const CustomTextField(
+                  icon: Icons.lock,
+                  label: "Senha",
+                  isSecret: true,
+                ),
+                SizedBox(
+                  height: 50,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                    ),
+                    child: const Text(
+                      "Entrar",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    onPressed: () {},
                   ),
-                  CustomTextField(
-                    icon: Icons.lock,
-                    label: "Senha",
-                    isSecret: true,
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    child: const Text(
+                      "Esqueceu a senha?",
+                      style: TextStyle(color: Colors.red),
+                    ),
+                    onPressed: () {},
                   ),
-                ],
-              ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: Row(
+                    children: const [
+                      Expanded(
+                        child: Divider(thickness: 2),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 15),
+                        child: Text("OU"),
+                      ),
+                      Expanded(
+                        child: Divider(thickness: 2),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 50,
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                      side: const BorderSide(
+                        width: 2,
+                        color: Colors.lightGreen,
+                      ),
+                    ),
+                    child: const Text(
+                      "Criar Conta",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                    onPressed: () {},
+                  ),
+                ),
+              ],
             ),
           ),
         ],
