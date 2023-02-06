@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/auth/components/custom_text_field.dart';
 
@@ -11,8 +12,50 @@ class SignInScreen extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: Container(
-              color: Colors.lightGreen,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text.rich(
+                  TextSpan(
+                    style: TextStyle(fontSize: 40),
+                    children: [
+                      TextSpan(
+                        text: 'Green',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextSpan(
+                        text: 'grocer',
+                        style: TextStyle(
+                          color: Colors.brown,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                  child: DefaultTextStyle(
+                    style: const TextStyle(
+                      fontSize: 25,
+                    ),
+                    child: AnimatedTextKit(
+                      repeatForever: true,
+                      pause: Duration.zero,
+                      animatedTexts: [
+                        FadeAnimatedText("Frutas"),
+                        FadeAnimatedText("Verduras"),
+                        FadeAnimatedText("Legumes"),
+                        FadeAnimatedText("Carnes"),
+                        FadeAnimatedText("Cerais"),
+                        FadeAnimatedText("Laticíneos"),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           Container(
