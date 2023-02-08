@@ -103,7 +103,7 @@ class SignInScreen extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                              builder: ((context) => BaseScreen()),
+                              builder: ((context) => const BaseScreen()),
                             ),
                           );
                         },
@@ -114,7 +114,9 @@ class SignInScreen extends StatelessWidget {
                       child: TextButton(
                         child: Text(
                           "Esqueceu a senha?",
-                          style: TextStyle(color: CustomColors.customContrastColor),
+                          style: TextStyle(
+                            color: CustomColors.customContrastColor,
+                          ),
                         ),
                         onPressed: () {},
                       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
+import 'package:greengrocer/src/home/home_tab.dart';
 
 class BaseScreen extends StatefulWidget {
   const BaseScreen({super.key});
@@ -20,7 +21,7 @@ class _BaseScreenState extends State<BaseScreen> {
         controller: pageController,
         children: [
           // Examples
-          Container(color: Colors.red),
+          const HomeTab(),
           Container(color: Colors.blue),
           Container(color: Colors.yellow),
           Container(color: Colors.purple),
