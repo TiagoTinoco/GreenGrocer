@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
+import 'package:greengrocer/src/pages/home/components/item_tile.dart';
 import 'components/category_tile.dart';
 import 'package:greengrocer/src/config/app_data.dart' as app_data;
 
@@ -104,6 +105,24 @@ class _HomeTabState extends State<HomeTab> {
                       selectedCategory = app_data.categories[index];
                     });
                   },
+                );
+              },
+            ),
+          ),
+          Expanded(
+            child: GridView.builder(
+              padding: const EdgeInsets.fromLTRB(16, 6, 16, 16),
+              physics: const BouncingScrollPhysics(),
+              itemCount: app_data.items.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                childAspectRatio: 9 / 11.5,
+              ),
+              itemBuilder: (_, index) {
+                return ItemTile(
+                  item: app_data.items[index],
                 );
               },
             ),
