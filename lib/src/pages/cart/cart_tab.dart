@@ -1,13 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
 import 'package:greengrocer/src/config/app_data.dart' as app_data;
+import 'package:greengrocer/src/models/cart_item_model.dart';
 import 'package:greengrocer/src/pages/cart/components/cart_tile.dart';
 
-class CartTab extends StatelessWidget {
+class CartTab extends StatefulWidget {
   const CartTab({super.key});
 
   @override
+  State<CartTab> createState() => _CartTabState();
+}
+
+class _CartTabState extends State<CartTab> {
+  @override
   Widget build(BuildContext context) {
+    void removeItemFromCart(CartItemModel cartItem) {
+      setState(() {
+        app_data.cartItems.remove(cartItem);
+      });
+    }
+
+    double cartTotalPrice() {
+      double total = 0;
+
+      for (var item in app_data.cartItems) {
+        total += item.totalPrice();
+      }
+
+      return total;
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Carrinho"),
@@ -18,7 +40,10 @@ class CartTab extends StatelessWidget {
             child: ListView.builder(
               itemCount: app_data.cartItems.length,
               itemBuilder: (_, index) {
-                return CartTile(cartItem: app_data.cartItems[index]);
+                return CartTile(
+                  cartItem: app_data.cartItems[index],
+                  remove: removeItemFromCart,
+                );
               },
             ),
           ),
@@ -47,7 +72,7 @@ class CartTab extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "R\$ 50,00",
+                  "R\$ ${cartTotalPrice()}",
                   style: TextStyle(
                     fontSize: 23,
                     color: CustomColors.customSwatchColor,
@@ -68,7 +93,9 @@ class CartTab extends StatelessWidget {
                         fontSize: 18,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () async {
+                      bool? result = await showOrderConfirmation();
+                    },
                   ),
                 ),
               ],
@@ -76,6 +103,40 @@ class CartTab extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Future<bool?> showOrderConfirmation() {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          title: const Text("Confirmação"),
+          content: const Text("Deseja realmente concluir o pedido?"),
+          actions: [
+            TextButton(
+              child: const Text("Não"),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+              child: const Text("Sim"),
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
