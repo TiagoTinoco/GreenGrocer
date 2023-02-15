@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:greengrocer/src/models/cart_item_model.dart';
 import 'package:greengrocer/src/models/order_model.dart';
+import 'package:greengrocer/src/pages/orders/components/order_status_widget.dart';
 import 'package:greengrocer/src/services/utils_services.dart';
 
 class OrderTile extends StatelessWidget {
@@ -20,6 +22,8 @@ class OrderTile extends StatelessWidget {
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
+          initiallyExpanded: order.status == 'pending_payment',
+          childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
           title: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,9 +38,67 @@ class OrderTile extends StatelessWidget {
               ),
             ],
           ),
-          // Example
-          children: [SizedBox(height: 100)],
+          children: [
+            IntrinsicHeight(
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: SizedBox(
+                      height: 150,
+                      child: ListView(
+                        children: order.items.map((orderItem) {
+                          return _OrderItemWidget(orderItem: orderItem);
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                  VerticalDivider(
+                    color: Colors.grey.shade300,
+                    thickness: 2,
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: OrderStatusWidget(
+                      status: order.status,
+                      isOverdue: order.overdueDateTime.isBefore(DateTime.now()),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
+      ),
+    );
+  }
+}
+
+class _OrderItemWidget extends StatelessWidget {
+  const _OrderItemWidget({
+    Key? key,
+    required this.orderItem,
+  }) : super(key: key);
+
+  final CartItemModel orderItem;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Row(
+        children: [
+          Text(
+            "${orderItem.quantity} ${orderItem.item.unit} ",
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Expanded(
+            child: Text(orderItem.item.itemName),
+          ),
+          Text("R\$ ${orderItem.totalPrice()}")
+        ],
       ),
     );
   }
