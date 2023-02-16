@@ -4,12 +4,15 @@ import 'package:greengrocer/src/models/item_model.dart';
 import 'package:greengrocer/src/pages/product/product_screen.dart';
 
 class ItemTile extends StatelessWidget {
-  const ItemTile({
+  ItemTile({
     super.key,
     required this.item,
+    required this.cartAnimationMethod,
   });
 
   final ItemModel item;
+  final void Function(GlobalKey) cartAnimationMethod;
+  final GlobalKey imageGk = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,10 @@ class ItemTile extends StatelessWidget {
                   Expanded(
                     child: Hero(
                       tag: item.imgUrl,
-                      child: Image.asset(item.imgUrl),
+                      child: Image.asset(
+                        item.imgUrl,
+                        key: imageGk,
+                      ),
                     ),
                   ),
                   Text(
@@ -89,7 +95,9 @@ class ItemTile extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            onTap: () {},
+            onTap: () {
+              cartAnimationMethod(imageGk);
+            },
           ),
         ),
       ],
