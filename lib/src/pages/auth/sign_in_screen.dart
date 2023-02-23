@@ -1,10 +1,10 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:greengrocer/src/pages/widgets/app_name_widget.dart';
 import 'package:greengrocer/src/pages/widgets/custom_text_field.dart';
-import 'package:greengrocer/src/pages/auth/sign_up_screen.dart';
-import 'package:greengrocer/src/pages/base/base_screen.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
+import 'package:greengrocer/src/pages_routes/app_pages.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -85,13 +85,7 @@ class SignInScreen extends StatelessWidget {
                           "Entrar",
                           style: TextStyle(fontSize: 18),
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: ((context) => const BaseScreen()),
-                            ),
-                          );
-                        },
+                        onPressed: () => Get.offNamed(PagesRoutes.baseRoute),
                       ),
                     ),
                     Align(
@@ -141,13 +135,7 @@ class SignInScreen extends StatelessWidget {
                             fontSize: 18,
                           ),
                         ),
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: ((context) => SignUpScreen()),
-                            ),
-                          );
-                        },
+                        onPressed: () => Get.toNamed(PagesRoutes.signUpRoute),
                       ),
                     ),
                   ],
