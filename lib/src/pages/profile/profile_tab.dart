@@ -46,7 +46,7 @@ class _ProfileTabState extends State<ProfileTab> {
           ),
           CustomTextField(
             readOnly: true,
-            initialValue: app_data.user.credential,
+            initialValue: app_data.user.cpf,
             icon: Icons.file_copy,
             label: "CPF",
             isSecret: true,
