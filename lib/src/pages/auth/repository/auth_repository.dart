@@ -21,7 +21,7 @@ class AuthRepository {
     if (result['result'] != null) {
       print('yes func');
 
-      final user = UserModel.fromMap(result['result']);
+      final user = UserModel.fromJson(result['result']);
       print(user);
     } else {
       print('not func');
