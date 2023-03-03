@@ -17,7 +17,7 @@ class SignUpScreen extends StatelessWidget {
     filter: {'#': RegExp(r'[0-9]')},
   );
 
-  final _formKey = GlobalKey();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +100,9 @@ class SignUpScreen extends StatelessWidget {
                                 "Cadastrar Usuário",
                                 style: TextStyle(fontSize: 18),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                _formKey.currentState!.validate();
+                              },
                             ),
                           ),
                         ],
